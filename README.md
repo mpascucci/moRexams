@@ -40,6 +40,7 @@ config.R           #the exam configuration file
 
 ## Exam procedure
 (To be translated in English)
+
 0. editer la configuration dans le ficheir `config.R`
 1. generer les examens écrits et NOPS (`exams_generation.R`)
 2. Faire une copie du dossier `Generated` pour securité
@@ -71,7 +72,7 @@ veut dire qu'il y a un erreur de lecture et qu'il faut corriger à main le fichi
 ATTENTION: **Modifier seulement avec un editor de texte simple pour ne pas perdre les zeros en tête**
 
 ## Archiver
-* Après l'évaluation copier les dossier suivants ailleur pour archivage:
+Après l'évaluation copier les dossier suivants ailleur pour archivage:
 - Evaluation
 - Scan
 - Generation
