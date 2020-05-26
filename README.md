@@ -2,7 +2,7 @@
 
 [Rexam](http://www.r-exams.org/) is a very powerful R package for exam sheets geenration and correction.
 The package is rich and its functions are highly customizable.
-For this very reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `morexams` is built to facilitate users access to the `rexam` functionalities, possibly lowering the entry cost.
+For the same reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `morexams` is built to facilitate users access to the `rexam` functionalities, possibly lowering the entry cost.
 
 `morexams` wraps `rexam` and mainly adds three features:
 * add checks to avoid simple problems (duplicate students, missing sheets ...) which are difficult to debug in `rexam`
