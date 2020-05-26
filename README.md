@@ -1,7 +1,7 @@
 # MOREXAMS
 
 [Rexam](http://www.r-exams.org/) is a very powerful R package for exam sheets geenration and correction.
-The package is reach and its functions are highly customizable.
+The package is rich and its functions are highly customizable.
 For this very reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `morexams` is built to facilitate users access to the `rexam` functionalities, possibly lowering the entry cost.
 
 `morexams` wraps `rexam` and mainly adds three features:
@@ -78,7 +78,9 @@ Après l'évaluation copier les dossier suivants ailleur pour archivage:
 - Generation
 
 ### Note pour utiliser des scan PDF (au lieu de PNG)
-testé seulement sous Linux
+(Temporarely removed feature)
+
+Sous Linux:
 * On linux install ImageMagik
 * modify /etc/ImageMagick-6/policy.xml
 from ` <policy domain="coder" rights="none" pattern="PDF" />`

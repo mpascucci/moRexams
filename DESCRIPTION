@@ -1,6 +1,6 @@
 Package: morexams
 Title: A wrapper for Rexams
-Version: 0.1.0
+Version: 0.1.1
 Author: Marco Pascucci
 Maintainer: Marco Pascucci <marpas.paris@gmail.com>
 Description: This package helps using Rexams by initializing folder structures and files and running checks.
