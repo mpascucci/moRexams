@@ -61,7 +61,8 @@ config.R           #the exam configuration file
 * choisir le format PNG, resolution 300dpi
 
 ## Correction
-1. compter les copies blanches (pas de matruicule) et les enlever du pacquet avant le scan
+0. compter les copies blanches (pas de matruicule) et les enlever du pacquet avant le scan
+1. corriger les questions ouvertes (s'il y en a) et mettre une note de 0 (nul) à 5 (parfait) en mettant une croix sur la case correspondante (e.g. une croix sur la deuxième case en partant de gauche vaut 2). Pas de croix = 0 points.
 2. numériser les feuilles et les copier dans le dossier `Scan/qcm` pour les QCM et `Scan/string` pour les feuilles des reponses libres.
 3. utiliser le script `exams_correction.R` pour l'évaluatuation intéractive
 4. en cas d'erreur inncomprehensible verifier que les pages sont toutes dans le même sans.
