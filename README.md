@@ -23,7 +23,7 @@ Open R in an empty directiory which will contain your new exam and run:
 library(morexams)
 morexams_init()
 ```
-This will setup the folder by copying the mains R scripts, config and tutorial files.
+This will setup the folder by copying the main R scripts, config and tutorial files.
 
 ## Folder structure
 ```
