@@ -1,7 +1,7 @@
+#' Read the multiple choice part of the scanned NOPS
+#' The scans should be PNG images
+#' They must be placed in the "Scan/nops" folder
 read_nops_scans <- function() {
-  # Read the multiple choice part of the scanned NOPS
-  # The scans should be PNG images
-  # They must be placed in the "Scan/nops" folder
   dir_qcm = file.path(DIR_SCAN,"nops")
   if(!dir.exists(dir_qcm)) dir.create(dir_qcm, recursive = TRUE)
   unlink(Sys.glob(file.path(dir_qcm,"*.zip")))
@@ -15,10 +15,10 @@ read_nops_scans <- function() {
   )
 }
 
+#' Read the written part of the scanned NOPS
+#' The scans should be PNG images
+#' image files must be placed in the "Scan/string" folder
 read_string_scan <- function() {
-  # Read the written part of the scanned NOPS
-  # The scans should be PNG images
-  # image files must be placed in the "Scan/string" folder
   dir_string = file.path(DIR_SCAN,"string")
   if(!dir.exists(dir_string)) dir.create(dir_string)
   # delete old zip files
@@ -33,10 +33,9 @@ read_string_scan <- function() {
   )
 }
 
+#' Check some necessary conditions for the automatic
+#' evaluation of the scanned exams
 check_evaluation <- function() {
-  # Check some necessary conditions for the automatic
-  # evaluation of the scanned exams
-
   cat("Checking for evaluation...\n")
 
   ### STUDENT list ###
@@ -128,9 +127,9 @@ check_evaluation <- function() {
   list(nNOPS=length(nops_fnames), nString=length(str_fnames))
 }
 
+#' call the evaluation function of rexams
+#' and generate the results.
 evaluation <- function() {
-  # call the evaluation function of rexams
-  # and generate the results.
   if (!dir.exists(DIR_EVALUATION)){
     dir.create(DIR_EVALUATION, recursive=TRUE)
   }
@@ -176,9 +175,9 @@ evaluation <- function() {
   file.copy(html_index, file.path(DIR_EVALUATION))
 }
 
+#' Generates a minimal result table.
+#' It contains only 3 columns StudentName, ID, Note
 evaluation_summary <- function(){
-  # Generates a minimal result table.
-  # It contains only 3 columns StudentName, ID, Note
   nops_eval_csv = file.path(DIR_EVALUATION,"nops_eval.csv")
   if (!file.exists(nops_eval_csv)) {
     stop(paste("file",nops_eval_csv,"not found!"))

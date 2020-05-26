@@ -1,8 +1,24 @@
-# moRexams main
-morexam_version = 0.1
+#' morexams: an easy start with rexam
+#'
+#' rexam (http://www.r-exams.org/) is a very powerful R package for exam sheets geenration and correction.
+#' The package is reach and its functions are highly customizable.
+#'
+#' For this very reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `morexams` is built to facilitate users access to the `rexam` functionality, possibly lowering the entry cost.
+#' `morexams` wraps `rexam` and adds mainly three features:
+#'
+#' * add checks to avoid simple problems (duplicate students, missing sheets ...) which are difficult to debug in `rexam`
+#'
+#' * add an `init` function to initialize a working folder with a basic structure needed to use `rexams` out of the box. The `init` function generates a fully-working example to immediately start with `rexam`.
+#'
+#' * move the configuration from the function parameters to a configuration file, useful to store configurations and simplyfy the script writing.
+#'
+#' @docType package
+#' @name morexams
+NULL
 
+#' Generate NOPS (exams sheets)
+#' Before using, load a configuration file with load_exam_config.
 make_exam <- function() {
-  # generate NOPS (exams sheets)
   make_nops()
   # save one PDF solution
   write_solution()
@@ -12,6 +28,10 @@ make_exam <- function() {
   backup_config()
 }
 
+#' Load the exam config file.
+#' This contains all the information needed for the exam generation.
+#' This function should be called at the beginning of every generation and correction script
+#' @param config_file The path to the config file
 load_exam_config = function(config_file) {
   clean_console()
   source(config_file)
@@ -39,11 +59,11 @@ load_exam_config = function(config_file) {
   cat(paste("copies:", NOPS_N, "\n"))
 }
 
+#' Run the evaluation of the scanned and read NOPS
+#' if force_read_scan is TRUE the scans are reading each time
+#' the funcion is called (time consuming), otherwise it uses the last reading
+#' @param force_read_scan if FALSE, the image processing takes place only the first time this function is called, further calls use the results of the first image processing
 run_evaluation = function(force_read_scan=FALSE) {
-  # Run the evaluation of the scanned and read NOPS
-  # if force_read_scan is TRUE the scans are reading each time
-  # the funcion is called (time consuming), otherwise it uses the last reading
-
   check_result = check_evaluation()
 
   # Retrieve the scanned results

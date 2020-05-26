@@ -1,5 +1,6 @@
 check_folder <- function(folderName) {
   # check if the specified folder exists, otherwise throw an error
+  # this function is private
   if (!dir.exists(folderName)) {
     stop(paste("The folder", folderName, "does not exist."))
   }
@@ -17,14 +18,22 @@ get_config_dir = function() {
   }
 }
 
+#' Initialize the current folder with the default working three of morexams
+#' Tutorial files are also copied in the working folder.
+#'
+#' @examples
+#' library(morexams)
+#' morexams_init()
 morexams_init = function() {
   templates = list.files(system.file("Template", package = "morexams"),full.names = TRUE)
   file.copy(templates, getwd(), recursive = TRUE)
 }
 
+#' Create a configuration dir in the current folder
+#' The configuration dir contains the LateX templates for the handwritten exams.
+#' If the current working directory contains a Configuration folder its LateX templates are used.
+#' This allows the modification of the templates
 create_config_dir = function() {
-  # Create a configuration dir in the current folder
-  # The configuration dir contains the PDF templates
   if (!dir.exists("Config")) {
     file.copy(system.file("Config", package = "morexams"), getwd(), recursive = TRUE)
   } else {
@@ -32,8 +41,9 @@ create_config_dir = function() {
   }
 }
 
+#' Return the length of the (significant) decimal part of x
+#' It can be useful when writing exercices
 count_decimals <- function(x) {
-  # return the length of the (significant) decimal part of x
   x <- toString(x)
   split = unlist(strsplit(x, "\\."))
   if (length(split) != 2) {
@@ -45,11 +55,12 @@ count_decimals <- function(x) {
 }
 count_decimals(2.14)
 
-# verifice que la fonction qui génère la solution est bien écrite.
-#
-# gen_sol : focntion qui genère la solution de l'exercice
-# params : liste nomée d'arguments pour appeler gen_sol
-# solution : la solution correspondante à l'appel de gen_sol avec params
+#' Check that the automatic solution generation function is well written.
+#' It is useful when writing exercices
+#'
+#' @param gen_sol function that generates the solution
+#' @param params named list of arguments of gen_sol
+#' @param solution the expected solution that should be calculated when calling gen_sol with the parameters params
 check_solution <- function(gen_sol, params, solution) {
   precision = count_decimals(solution)
   if (
@@ -61,11 +72,13 @@ check_solution <- function(gen_sol, params, solution) {
   }
 }
 
+#' Clean the console screen
 clean_console <- function() {
-  cat("\014") # clean the console screen
+  cat("\014")
 }
 
-# renders a list as an HTML table
+#' Render a list as an HTML table
+#' Useful to display data in an Rmarkdown exercice
 array_to_HTMLTable <- function(c, columns) {
   s <- "<style>td.lex { padding-right: 0.5em; } </style>"
   s <- paste(s,"<table style='margin:auto;'>",sep="\n")
@@ -88,8 +101,8 @@ array_to_HTMLTable <- function(c, columns) {
   s
 }
 
-
-# renders a list as a MarkDown table
+#' Render a list as an markdown table
+#' Useful to display data in an Rmarkdown exercice
 array_to_MDTable <- function(c, columns) {
   col_n = min(columns, length(c))
   s <- paste(rep('', times = col_n+2), collapse="|")
@@ -114,13 +127,12 @@ array_to_MDTable <- function(c, columns) {
   s
 }
 
+#' Remove the specified folder.
+#'
+#' Check if the folder exists already.
+#' If it exists, it will continue according to the
+#' value of the OVERWRITE config variable
 safe_mkdir <- function (folder) {
-  # Remove the specified folder.
-  #
-  # Check if the folder exists already.
-  # If it exists, it will continue according to the
-  # value of the OVERWRITE config variable
-
   if (!dir.exists(folder)){
     dir.create(folder, recursive=TRUE)
   } else {

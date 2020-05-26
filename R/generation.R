@@ -1,5 +1,4 @@
-
-# Generate the NOPS
+#' Generate the NOPS
 make_nops = function(show_pdf_solution=FALSE) {
   # check the input folders
   exos_path = file.path(EXOS_BASE_REL)
@@ -53,10 +52,9 @@ make_nops = function(show_pdf_solution=FALSE) {
   }
 }
 
+#' Write the solution of the exam in a PDF document
+#' The NOPS need to to have already been generated.
 write_one_solution <- function() {
-  # Write the solution of the exam in a PDF document
-  # The NOPS need to to have already been generated.
-
   solution_folder = file.path(DIR_GENERATION, TITLE)
   exos_path = file.path(EXOS_BASE_REL)
 
@@ -76,9 +74,8 @@ write_one_solution <- function() {
   cat(paste(solution_folder," \n"))
 }
 
+#' Generate a solution PDF for each generated NOPS
 make_all_solutions = function() {
-  # Generate a solution PDF for each generated NOPS
-
   # name of the solutions subfolder
   SOLUTIONS_DOSSIER_PDF = "solutions"
 
@@ -111,8 +108,8 @@ make_all_solutions = function() {
   # exams2html() genère un document HTML
 }
 
+#' Generate traditional exam sheets (no optical correction)
 make_traditional_exams = function() {
-  # Generate traditional exam sheets (no optical correction)
   ECRITS_DOSSIER_PDF = "hand_corrected" # dossier où les PDF seront généres
 
   # check the input folders
@@ -147,13 +144,12 @@ make_traditional_exams = function() {
   # exams2html()
 }
 
+#' Make a backup copy of the current configuration file
+#'
+#' This is particularly useful after generating the exam sheets
+#' because some output files need to be re-used in the
+#' optical correction step.
 backup_config <- function() {
-  # Make a backup copy of the current configuration file
-  #
-  # This is particularly useful after generating the exam sheets
-  # because some output files need to be re-used in the
-  # optical correction step.
-
   time_tag = format(Sys.time(), "%Y_%m_%d-%H_%M_%S")
 
   output_base_path = file.path(DIR_GENERATION, TITLE)
@@ -182,4 +178,3 @@ backup_config <- function() {
 
   cat(">>> Backup completed.")
   }
-
