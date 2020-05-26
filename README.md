@@ -7,7 +7,7 @@ For this very reason its use might be confusing at first. This package is the sy
 `morexams` wraps `rexam` and mainly adds three features:
 * add checks to avoid simple problems (duplicate students, missing sheets ...) which are difficult to debug in `rexam`
 * add an `init` function to initialize a working folder with a basic structure needed to use `rexams` out of the box. The `init` function generates a fully-working example to immediately start with `rexam`.
-* move the configuration from the function parameters to a configuration file, useful to store configurations and simplyfy the script writing.
+* move the configuration from the function parameters to a configuration file, useful to store configurations and simplify the script writing.
 
 ## Install
 Install `devtools` and `morexams` with the following commands:
