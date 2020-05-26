@@ -146,8 +146,8 @@ make_traditional_exams = function() {
 
 #' Make a backup copy of the current configuration file
 #'
-#' This is particularly useful after generating the exam sheets
-#' because some output files need to be re-used in the
+#' This can be useful after generating the exam sheets
+#' to archive files that need to be re-used in the
 #' optical correction step.
 backup_config <- function() {
   time_tag = format(Sys.time(), "%Y_%m_%d-%H_%M_%S")
