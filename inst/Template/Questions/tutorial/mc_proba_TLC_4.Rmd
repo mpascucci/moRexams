@@ -1,0 +1,58 @@
+```{r data generation, echo = FALSE, results = "hide"}
+p <- round(runif(1,0.01,0.2), digits=2) # probibilité qu'un individu ne se presente pas
+n <- round(500*(1+p), digits=0) # overbooking
+
+den <- round( n*p*(1-p), digits = 1)
+```
+
+
+
+Question
+========
+Une compagnie aérienne fournit des réservations sur le vol d'un
+appareil de 500 places. La probabilité qu'un passager ayant effectué
+la réservation pour ce vol ne se présente pas à l'embarquement est de $`r p`$ et les comportements des différents passagers sont supposés être indépendants. Si la compagnie aérienne accorde $`r n`$ réservations sur ce vol, calculer une approximation de la probabilité pour que certains passagers se retrouvent sans place.
+
+
+Answerlist
+----------
+* $\Phi\left( \frac{`r n-500-n*p`}{\sqrt{`r den`}}\right)$
+* $1-\Phi\left( \frac{`r -(n-500-n*p)`}{\sqrt{`r den`}}\right)$
+* $2\Phi\left( \frac{`r n-500-n*p`}{\sqrt{`r den`}}\right)$
+* $\Phi\left( \left\vert \frac{`r n-500-n*p`}{\sqrt{`r den`}}\right\vert \right)$
+* $\Phi\left( \frac{`r 500-n*p-n`}{\sqrt{`r den`}}\right)$
+
+
+Solution
+========
+Notons $ X_i=1 $ si le passager i ne se présente pas.
+$$
+  S_n=\sum_{i=1}^n X_i
+$$,
+
+$$
+\mathbb{P} (S_n< n-500)	=
+\mathbb{P} \left( \frac{S_n-`r n*p`}{\sqrt{`r den`}} < \frac{`r n-500-n*p`}{\sqrt{`r den`}} \right) \approx
+\Phi\left( \frac{`r n-500-n*p`}{\sqrt{`r den`}}\right)
+$$,
+où $\Phi$ est la fonction de répartition de la gaussienne centrée réduite.
+La bonne solution est
+$$ \Phi\left( \frac{`r n-500-n*p`}{\sqrt{`r den`}}\right) $$.
+
+
+
+Answerlist
+----------
+* Vrai
+* Vrai
+* Faux
+* Faux
+* Faux
+
+Meta-information
+================
+exname: sapin
+extype: mchoice
+exsolution: 11000
+exshuffle: 5
+

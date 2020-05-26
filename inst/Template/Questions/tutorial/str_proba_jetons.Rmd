@@ -1,0 +1,74 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r data generation, echo = FALSE, results = "hide"}
+n <- 100
+Sn <- 59
+proba <- 0.95
+
+den2 <- 4*n*(1-proba)
+sol <- round(c(Sn/n - 1/sqrt(den2), Sn/n + 1/sqrt(den2)), digits=2)
+```
+
+Question
+========
+On considère une expérience aléatoire qui consiste à compter le nombres de "piles" en $n$ lancers d'un jeton. On note $X_i=1$, si le résultat obtenu au ième lancer est "pile" et 0 sinon.
+On considère que les lancers sont indépendants et effectués dans les mêmes conditions et on note $p=\mathbb{P}("pile")$.
+
+* La valeur de $p$ est-elle à priori connue?
+* Donner la loi de $X_i$.
+* Donner la loi de $S_n$ le nombre de "piles" obtenus en $n$ lancers.
+* Enoncer l'inégalité de Bienaymé-Tchebichev dans ce contexte.
+* En utilisant que $p(1-p)\leq 1/4$, en déduire un intervalle $[A_n,B_n]$ tel que
+
+$$
+\mathbb{P}[p\in [A_n,B_n]]\geq `r proba*100` \%
+$$
+
+* Sur $n=`r n`$ lancers on a observé `r Sn` "piles". Donner l'intervalle correspondant.
+
+
+Solution
+========
+Notons $X_i=1 \sim \mathcal{B}(p)$, alors
+$$
+  S_n=\sum_{i=1}^n X_i\sim \mathcal{B}(n,p)
+$$
+La valeur de $p$ est à priori inconnue.
+L'inégalité de Bineaymé-Tchebichev fournit la majoration:
+$$
+  \mathbb{P}\left(\left\vert \overline{X}-p \right\vert >t \right) \leq
+  \frac{p(1-p)}{n t^2} \leq
+  \frac{1}{4nt^2}
+$$
+
+Cette inégalité s'écrit aussi
+$$ 
+  \mathbb{P}\left(\overline{X}-t\leq p \leq \overline{X}+t \right) \geq
+  1-\frac{1}{ 4n t^2}
+$$
+On cherche donc $t$ tel que 
+$$  
+  1-\frac{1}{4nt^2} \geq `r proba`
+$$
+soit aussi
+$$
+  t \geq \frac{1}{\sqrt{4*`r n` * `r 1-proba`}} = 
+  \frac{1}{\sqrt{`r den2`}}
+$$
+Ainsi pour $s_n=`r Sn`$, l'intervalle
+est 
+$$
+  \left[\frac{`r Sn`}{`r n`} - \frac{1}{\sqrt{`r den2`}};\;
+  \frac{`r Sn`}{`r n`} + \frac{1}{\sqrt{`r den2`}} \right]
+$$
+
+Meta-information
+================
+extype: string
+exsolution: $\left[\frac{`r Sn`}{`r n`} - \frac{1}{\sqrt{`r den2`}} ;\; \frac{`r Sn`}{`r n`} +  \frac{1}{\sqrt{`r den2`}} \right] = [`r sol`]$
+exname: jetons
+
+

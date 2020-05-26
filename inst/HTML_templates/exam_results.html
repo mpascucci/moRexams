@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>Exam result</title>
+
+    <style>
+        #redtext {
+        color : red;
+      }
+      .redtext {
+        color : red;
+      }
+      .alert {
+        color : red;
+        text-decoration: none;
+        text-decoration-color: red;
+        font-weight: bold;
+        background-color: yellow;
+        padding-left: 1em;
+        padding-right: 1em;
+      }
+      h1 {
+        display: inline;
+      }
+      .my_latex { font-size: 2em !important; }
+      .inline_formula { font-size: 1.1em !important; }
+      hr {
+        display: block;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        margin-left: auto;
+        margin-right: auto;
+        border-style: dashed;
+        border-width: 1px;
+        color: #bbb;
+      }
+      #linkToNote {
+        text-decoration: none;
+        transition: all 0.5s ease;
+
+      }
+      #linkToNoteP {
+        margin:auto;
+        padding: 1em;
+        color: white;
+        font-weight: bold;
+        font-size: 150%;
+        background-color: green;
+      }
+      body{
+        margin: 1cm      
+      }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="content">
+        <a name="notes"></a>
+        <h1>Exam results</h1>
+        <form class="pure-form" id="examForm">
+            <fieldset>
+                <legend>Enter yout student ID and press search</legend>
+                <input type="text" id="matricule" placeholder="matricule" required>
+                <button type="button" class="pure-button pure-button-primary" onclick="redirectToResult(this, formName='examForm');">search</button>
+            </fieldset>
+        </form>
+        <div class="link-container" id="link-container-examForm"></div>
+    </div>
+</body>
+
+
+<script type="text/javascript">
+    function redirectToResult(e, formName) {
+        var form = document.getElementById(formName);
+
+        // get all the containers of the link button and clear their content
+        var linkContainers = document.getElementsByClassName("link-container");
+        for (var i = 0; i < linkContainers.length; i++) {
+            linkContainers[i].innerHTML='';
+        };
+        // get the link container corresponding to this form and fill with hidden elements
+        var linkContainer = document.getElementById("link-container-"+formName);
+        linkContainer.innerHTML='\
+                <a href="" id="linkToNote" target="_blank"><p style="text-align: center" id="linkToNoteP" hidden></p></a> \
+                <p class="alert" id="remplirTout" hidden>Please fill all fields.</p> \
+                <p class="alert" id="noteIntrouvable" hidden>ID not found</p>';
+
+
+        var matricule = form.elements.namedItem("matricule").value;
+        var link = document.getElementById("linkToNote");
+        var linkP = document.getElementById("linkToNoteP")
+
+        document.getElementById("remplirTout").hidden = true;
+        document.getElementById("noteIntrouvable").hidden = true;
+        //        link.hidden = true;
+        linkP.hidden = true;
+
+        if (matricule == '') {
+            document.getElementById("remplirTout").hidden = false;
+            return;
+        }
+
+        //        var id = nom + "_" + prenom + "_" + parcours
+        //        console.log(id);
+        var url = "HTML_results_data" + "/" + matricule;
+        console.log(url)
+        link.href = url;
+        linkP.innerHTML = "Show the exam sheet";
+        linkP.hidden = false;
+
+        // check if the student exist otherwhise
+
+        var request;
+        if (window.XMLHttpRequest)
+            request = new XMLHttpRequest();
+        else
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+
+        request.open('HEAD', url, false);
+        request.send();
+        if (request.status === 404) {
+            document.getElementById("noteIntrouvable").hidden = false
+            linkP.hidden = true;
+        } else {
+            //            window.open(url);
+            //            linkP.hidden = false;
+        }
+    }
+
+    alerts = document.getElementsByClassName("alert");
+    let fa = "<i class=\"fas fa-exclamation-circle\"></i>";
+    for (var i = 0; i < alerts.length; i++) {
+        txt = alerts[i].innerHTML;
+        alerts[i].innerHTML = fa + " " + txt;
+    }
+
+</script>
+
+</html>

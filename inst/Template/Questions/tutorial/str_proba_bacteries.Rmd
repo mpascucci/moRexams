@@ -1,0 +1,60 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+Question
+========
+On note $X$ la durée de survie en mn d'une colonie de bactéries $B$ en milieu acide (temps au bout duquel on ne peut plus déceler aucune bactérie dansla boîte de culture) et on considère que $X$ est une variable aléatoire qui admet la densité suivante:
+$$
+  f_{\theta}(x) =   \left \{ \begin{array}{ll}
+  axe^{-x^2/\theta} & \textrm{ si }  x \geq 0 \\
+  \\
+  0  &  \textrm{ sinon} 
+  \end{array}  
+  \right.
+$$
+où $\theta>0$ est un paramètre inconnu.  
+
+1. Calculer la valeur de $a$ (en fonction de $\theta$) pour que $f$ soit bien une densité de probabilité (pour l'intégration, on pourra faire un changement de variable en posant $u=x^2$). 
+
+On admet qu'en prenant cette valeur pour $a$,
+$$
+  E(X)=\sqrt{\pi\theta}/2,\quad E(X^2)=\theta \quad\mbox{et}\quad V(X^2)=\theta^2
+$$
+Les résultats observés sur $n=50$ boites de culture sont les suivants :
+$$
+  \sum_{i=1}^{n}{x_i}=2870 \quad \sum_{i=1}^{n}{x_i^2}=179412
+$$
+On suppose que $x_1,...,x_n$ sont les réalisations d'un $n$-échantillon $X_1,...,X_n$ de même loi que $X$.
+Soit
+$$
+  \hat{\theta}_n=\frac{1}{n}\sum_{i=1}^{n}{X_i^2}
+$$
+
+2. Calculer $\mathbb{E}[\hat{\theta}_n]$. 
+
+3. Montrer que $\mathbb{E}[( \hat{\theta}_n-\theta)^2]=\mbox{Var}(\hat{\theta}_n)$.
+
+4. En déduire  l'expression de $\mathbb{E}[( \hat{\theta}_n-\theta)^2]$.
+
+5. Vers quoi converge $\mathbb{E}[( \hat{\theta}_n-\theta)^2]$ quand $n$ tend vers l'infini?
+
+
+Solution
+========
+1. $a=\frac{2}{\theta}$.
+
+2. $\mathbb{E}[\hat{\theta}_n]=\mathbb{E}(X_1^2)=\theta$
+
+3. Par définition de la variance, $\mathbb{E}[( \hat{\theta}_n-\theta)^2]=\mathbb{E}[( \hat{\theta}_n-\mathbb{E}(\hat{\theta}_n)^2]=\mbox{Var}(\hat{\theta}_n)$.
+
+4. $\mathbb{E}[( \hat{\theta}_n-\theta)^2]=\mbox{Var}(\hat{\theta}_n)=\frac{\mbox{Var}(X_1^2)}{n}=\frac{\theta^2}{n}$.
+
+5. Par conséquent $\mathbb{E}[( \hat{\theta}_n-\theta)^2]$ converge vers 0 quand $n$ tend vers l'infini.
+
+Meta-information
+================
+extype: string
+exsolution: exercice théorique
+exname: colonie bacterie

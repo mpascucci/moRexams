@@ -1,0 +1,6 @@
+exportPattern("^[[:alpha:]]+")
+import(exams)
+import(purrr)
+import(png)
+import(tth)
+import(zip)

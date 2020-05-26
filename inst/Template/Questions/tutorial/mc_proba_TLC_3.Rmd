@@ -1,0 +1,76 @@
+```{r data generation, echo = FALSE, results = "hide"}
+library(lammexams)
+n <- sample(85:115, 1)# nombre de morceaux de rails
+mu <- 1 # espérance de la longueur du morceau
+stdinv <- sample(100:200, 1) # inverse de l'écart type 
+L <- n*mu + round((1/stdinv)*runif(1,1,3), digits=3) # longueur attendue plus quelques écarts type
+
+gen_sol <- function (L,n,mu,stdinv) {
+  1 - pnorm( (L-n*mu)/( (1/stdinv)*sqrt(n) ), 0, 1)
+}
+
+# verification que la fonction gen_sol est bien écrite
+
+# les paramètres de cette fonction doiven être rempli manuellement, solultion comprise
+check_solution(gen_sol, # la fonction qui génère la solution en fonction des paraètres
+  list(L=100.15,n=100,mu=1,stdinv=170), # une liste de paramètre pour l'exo
+  0.0054 # la solution correspondante pour cette liste de paramètres
+)
+
+
+sol <- gen_sol(L,n,mu,stdinv)   
+err <- c(1)
+
+delta = 0.1
+sc <- num_to_schoice(sol, range=c(-delta,1+delta), delta=delta, method="runif", digits=2)
+sc
+```
+
+
+
+Question
+========
+Un constructeur pose des rails bout à bout. Chacun de ces rails doit mesurer théoriquement `r mu` m. 
+En réalité, leurs longueurs sont des variables aléatoires de mêmes lois d'espérance $\mu=`r mu`$m et d'écart-type $\sigma=1/ `r stdinv`$m et sont indépendantes les unes des autres. On pose $`r n`$ rails. Calculer une approximation de la probabilité que la longueur effective de la voie dépasse `r L` mètres en utilisant $\Phi$ la fonction de répartition de la loi gaussienne centrée réduite.
+
+ 
+```{r questionlist, echo = FALSE, results = "asis"}
+answerlist(sc$questions, markup = "markdown")
+```
+
+
+Solution
+========
+Notons
+$$
+S_n=\sum_{i=1}^nX_i
+$$
+alors:
+
+$$
+  \mathbb{P}(S_n>`r L`)=
+  \mathbb{P}\left(\frac{S_n - `r n*mu`}{ (1/`r stdinv`)*\sqrt{`r n`}}>\frac{`r L -n*mu`}{ (1/`r stdinv`)*\sqrt{`r n`}}\right)\approx
+  1-\Phi\left(\frac{`r L -n*mu`}{ (1/`r stdinv`)`*\sqrt{`r n`}}\right)
+$$
+où $\Phi$ est la fonction de répartition de la gaussienne centrée réduite.
+
+La bonne solution est $1-\Phi\left( \frac{L-n\mu}{\sigma*\sqrt{n}}\right)$ soit 
+```{r} 
+sol
+
+```
+
+
+Answerlist
+----------
+* Vrai
+* Faux
+* Faux
+* Faux
+* Faux
+
+Meta-information
+================
+exname: sapin
+extype: schoice
+exsolution: `r mchoice2string(sc$solutions)`
