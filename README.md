@@ -1,4 +1,4 @@
-# MOREXAMS
+# moRexams
 
 [Rexam](http://www.r-exams.org/) is a very powerful R package for exam sheets geenration and correction.
 The package is rich and its functions are highly customizable.
