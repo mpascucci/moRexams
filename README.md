@@ -39,49 +39,51 @@ config.R           #the exam configuration file
 ```
 
 ## Exam procedure
-(To be translated in English)
+This procedure is the result of one semester trial-and-error experience. Whatch out: most of the complexity (and possible problems) lie in the physical steps of the procedure (printing, explaining, collecting, scanning) more than in the software.
 
-0. editer la configuration dans le ficheir `config.R`
-1. generer les examens écrits et NOPS (`exams_generation.R`)
-2. Faire une copie du dossier `Generated` pour securité
-3. imprimer les copies recto-verso, agraffées.
-4. prevenir les etudiants de la methode d'examen (en particulier stilo à bille bleu/noir et expliquer bien comment marquer le nombre de matricule sur la copie)
-5. prendre une copie, faire les exercices et vérifier que la bonne reponse est presente dans chaque question (c'est à dire qu'on ne s'est pas trompé dans le code des exercices au moment du calcul de la solution)
+0. edit the configuration file `config.R` where you can specify the exam's properties (e.g. title, author ...)
+1. generate the exam copies by following the example in `exams_generation.R`
+2. make a backup copy of the `Generated` folder for safety.
+3. print the exam sheets two-sided and clipse them.
+4. take the time to carefully explain the student the exam methodology: explain that a ball-point pen (black or blue) must be used, give a clear example on how to fill the student-ID part in the first page of the exam sheet.
+5. do the exercice in one exam sheet: verify that the correct answer is present in each multiple-choice question (i.e. the exercices are written correctly).
 
-## Examen
-0. prevoir des stilos à billes
-1. bien expliquer comment remplir les cases pour la matricule et les reponses (sens de remplissage, croix precise, pas de bavures)
-2. demander aux étudiants de degraffer (arracher) et rendre une seule feuille de solutions pour chaque partie de l'examen (QCM/reponse ouverte). Faire deux tas: un tas pour la feuille des solution QCM et un tas pour les copies manuscrites (traditionnelles) qui doivent être rendues même vides. Dans chaque copie manuscrite il faut mettre, si presente, la feuille des reponses ouverte (string)
-3. S'assurer que les étudiants aient écrit leur nom/prenom/matricule sur la feuille des resultat et su la copie manuscrite
-4. Dire aux étudiants de garder la feuille de l'énoncé, qui leur sera indispensable pour comprendre la correction.
+## Exam
+0. take some extra ball-point pens with you
+1. carefully explain how the form should be filled wiht the student's ID and the chosen answers. Stress that only crosses whould be used to mark the answers and that the writing must be clean.
+2. If the exam contains open questions, ask the student to write their name and ID within the first answer field.
+3. Ask the student to separate the exam sheets and return only one solution sheet per exam part (QCM and open questions), which should be piled separately. Al other official exam sheets should also be returned (even empty).
+4. Make shure the student wrote their name and ID on all returned sheets.
+5. Tell the students to keep the exam text, which is unique, therefore they will need it for correction. 
 
 ## Scan
-* **Mettre toutes les copies dans le même sense**, coté opposé à l'agraffe en premier (avec cette configuration les pages sont scannées à l'invers, c'est normal, ça doit être comme ça si non ça ne marche pas).
-* forcer le format A4
-* choisir le format PNG, resolution 300dpi
+* Count the copies that do not report a student ID (if any) and remove them before scanning
+* **Put all copies in the same orientation**, scan them bottom first.
+* force fromat A4 in the scanner
+* choose PNG format (no PDF), and set resolution to 300dpi
 
 ## Correction
-0. compter les copies blanches (pas de matruicule) et les enlever du pacquet avant le scan
-1. corriger les questions ouvertes (s'il y en a) et mettre une note de 0 (nul) à 5 (parfait) en mettant une croix sur la case correspondante (e.g. une croix sur la deuxième case en partant de gauche vaut 2). Pas de croix = 0 points.
-2. numériser les feuilles et les copier dans le dossier `Scan/qcm` pour les QCM et `Scan/string` pour les feuilles des reponses libres.
-3. utiliser le script `exams_correction.R` pour l'évaluatuation intéractive
-4. en cas d'erreur inncomprehensible verifier que les pages sont toutes dans le même sans.
-Erreur type:
+0. correct the open questions first (if any) and give a note by marking one of the cases in the note field (upper right part of the sheet). No mark corresponds to zero (=very bad), the other cases correspond to 1 to 5 (=perfect) from left to right. Do not mark more than one case. The actual points will be determined in the evaluation script later.
+1. scan the solution sheets and put the image files in the `Scan/qcm` and `Scan/string` folders for multiple-choice and open questions respectively.
+3. evaluate the exam by following the example in `exams_correction.R`. The evaluation is interactive and will ask to check in case of ambigiuity.
+4. double check that the pages are all in the same orientation if you get strange error messages.
+5. in case you get an error of this kind
+```
 	Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
 	line 8 did not have 6 elements
-veut dire qu'il y a un erreur de lecture et qu'il faut corriger à main le fichier Daten.txt dans le zip généré.
-ATTENTION: **Modifier seulement avec un editor de texte simple pour ne pas perdre les zeros en tête**
+```
+this means that the optical reading failed and that line 8 in the Daten.txt file automatically generated has to be corrected manually.
+This file is will be found in the `nops_scan` zip file in the `./Scan/nops` folder generated by the correction process. You should unzip it, correct it and then update the zip file.
+WARNING: **Use a simple text editor to edit the Daten.txt file in order to preserve the leading zeros in the fields.**
 
 ## Archiver
-Après l'évaluation copier les dossier suivants ailleur pour archivage:
+After the exam evaluation, copy the following folders for a backup:
 - Evaluation
 - Scan
 - Generation
 
 ### Note pour utiliser des scan PDF (au lieu de PNG)
 (Temporarely removed feature)
-
-Sous Linux:
 * On linux install ImageMagik
 * modify /etc/ImageMagick-6/policy.xml
 from ` <policy domain="coder" rights="none" pattern="PDF" />`
