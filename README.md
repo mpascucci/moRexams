@@ -1,8 +1,8 @@
 # moRexams
 
-[Rexam](http://www.r-exams.org/) is a very powerful R package for exam sheets geenration and correction.
+[Rexam](http://www.r-exams.org/) is a very powerful R package for exam sheets genration and correction.
 The package is rich and its functions are highly customizable.
-For the same reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `morexams` is built to facilitate users access to the `rexam` functionalities, possibly lowering the entry cost.
+For the same reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `moRexams` is built to facilitate users access to the `rexam` functionalities, possibly lowering the entry cost.
 
 `morexams` wraps `rexam` and mainly adds three features:
 * add checks to avoid simple problems (duplicate students, missing sheets ...) which are difficult to debug in `rexam`
@@ -46,21 +46,21 @@ This procedure is the result of one semester trial-and-error experience. Whatch 
 2. make a backup copy of the `Generated` folder for safety.
 3. print the exam sheets two-sided and clipse them.
 4. take the time to carefully explain the student the exam methodology: explain that a ball-point pen (black or blue) must be used, give a clear example on how to fill the student-ID part in the first page of the exam sheet.
-5. do the exercice in one exam sheet: verify that the correct answer is present in each multiple-choice question (i.e. the exercices are written correctly).
+5. do the exercices yourself: verify that the correct answer is present in each multiple-choice question (i.e. the exercices are written correctly).
 
 ## Exam
-0. take some extra ball-point pens with you
-1. carefully explain how the form should be filled wiht the student's ID and the chosen answers. Stress that only crosses whould be used to mark the answers and that the writing must be clean.
-2. If the exam contains open questions, ask the student to write their name and ID within the first answer field.
-3. Ask the student to separate the exam sheets and return only one solution sheet per exam part (QCM and open questions), which should be piled separately. Al other official exam sheets should also be returned (even empty).
-4. Make shure the student wrote their name and ID on all returned sheets.
-5. Tell the students to keep the exam text, which is unique, therefore they will need it for correction. 
+0. take some extra ball-point pens with you.
+1. carefully explain how the form should be filled wiht the student's ID and the chosen answers. Make clear that only crosses whould be used to mark the answers and that the writing must be clean.
+2. if the exam contains open questions, ask the student to write their name and ID within the first answer field.
+3. ask the student to separate the exam sheets and return only one solution sheet per exam part (QCM and open questions), which should be piled separately. All other official exam sheets should also be returned (even empty).
+4. make shure the student wrote their name and ID on all returned sheets.
+5. tell the students to keep the exam text, which is unique, therefore they will need it for correction. 
 
 ## Scan
-* Count the copies that do not report a student ID (if any) and remove them before scanning
+* Count the copies that do not report a student ID (if any) and remove them before scanning.
 * **Put all copies in the same orientation**, scan them bottom first.
-* force fromat A4 in the scanner
-* choose PNG format (no PDF), and set resolution to 300dpi
+* force fromat A4 in the scanner.
+* choose PNG format (no PDF), and set resolution to 300dpi.
 
 ## Correction
 0. correct the open questions first (if any) and give a note by marking one of the cases in the note field (upper right part of the sheet). No mark corresponds to zero (=very bad), the other cases correspond to 1 to 5 (=perfect) from left to right. Do not mark more than one case. The actual points will be determined in the evaluation script later.
