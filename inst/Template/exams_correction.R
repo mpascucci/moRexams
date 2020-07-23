@@ -1,7 +1,7 @@
 library(morexams)
 # load the configuration
 rm(list = ls())
-load_exam_config("Config.R")
+load_exam_config("config.R")
 
 
 ## CORRECTION CONFIGURATION
@@ -21,4 +21,3 @@ PARALLEL_CORES = 1
 # if force_read_scan is TRUE the scans are reading each time
 # the funcion is called (time consuming), otherwise it uses the last reading
 run_evaluation(force_read_scan = FALSE)
-

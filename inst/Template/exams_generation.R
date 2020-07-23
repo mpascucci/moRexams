@@ -2,7 +2,7 @@ library(morexams)
 
 # load the exam configuration
 rm(list = ls())
-load_exam_config("Config.R")
+load_exam_config("config.R")
 
 ## OUTPUT FOLDER:
 ## exams are generated in a subfloder of the current
