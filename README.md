@@ -82,7 +82,7 @@ After the exam evaluation, copy the following folders for a backup:
 - Scan
 - Generation
 
-### Note no using PDF scans (instead of PNG)
+### Note on using PDF scans (instead of PNG)
 This feature does not always work propery, therefore has been temporarely removed.
 If you want to restore it these are the required steps to make ImageMagik work on Linux:
 * On linux install ImageMagik
