@@ -5,8 +5,8 @@ The package is rich and its functions are highly customizable.
 For the same reason its use might be confusing at first. This package is the synthesis of one year wokring with r-exams. `moRexams` is built to facilitate users access to the `rexam` functionalities, possibly lowering the entry cost.
 
 `morexams` wraps `rexam` and mainly adds three features:
-* add checks to avoid simple problems (duplicate students, missing sheets ...) which are difficult to debug in `rexam`
-* add an `init` function to initialize a working folder with a basic structure needed to use `rexams` out of the box. The `init` function generates a fully-working example to immediately start with `rexam`.
+* adds checks to avoid simple problems (duplicate students, missing sheets ...) which are difficult to debug in `rexam`
+* adds an `init` function to initialize a working folder with a basic structure needed to use `rexams` out of the box. The `init` function generates a fully-working example to immediately start with `rexam`.
 * move the configuration from the function parameters to a configuration file, useful to store configurations and simplify the script writing.
 
 ## Install
@@ -28,42 +28,43 @@ This will setup the folder by copying the main R scripts, config and tutorial fi
 ## Folder structure
 ```
 |-Generated        #generated exam sheets
-|-Logo             #logo to put on the exam sheets
+|-Logo             #an image for exam sheets header
 |-Questions        #exam questions
 |-Scan             #scanned exam sheets
 |-Students         #students list
 |-Evaluation       #exam results
-exam_generation.R  #example script for exams sheet generation
-exam_correction.R  #example script for auto exams correction
+exam_generation.R  #R script for exams sheet generation
+exam_correction.R  #R script for auto exams correction
 config.R           #the exam configuration file
 ```
 
 ## Exam procedure
-This procedure is the result of one semester trial-and-error experience. Whatch out: most of the complexity (and possible problems) lie in the physical steps of the procedure (printing, explaining, collecting, scanning) more than in the software.
+This procedure is the result of one semester trial-and-error experience.
+**Watch out**: most of the complexity (and possible problems) lie in the physical steps of the procedure (printing, explaining, collecting, scanning) more than in the software.
 
-0. edit the configuration file `config.R` where you can specify the exam's properties (e.g. title, author ...)
+0. edit the configuration file `config.R` where you can specify the exam's properties (e.g. title, author, ...)
 1. generate the exam copies by following the example in `exams_generation.R`
 2. make a backup copy of the `Generated` folder for safety.
 3. print the exam sheets two-sided and clipse them.
-4. take the time to carefully explain the student the exam methodology: explain that a ball-point pen (black or blue) must be used, give a clear example on how to fill the student-ID part in the first page of the exam sheet.
+4. take the time to carefully explain the exam methodology to the students: explain that a ball-point pen (black or blue) must be used, give a clear example on how to fill the student-ID part in the first page of the exam sheet.
 5. do the exercices yourself: verify that the correct answer is present in each multiple-choice question (i.e. the exercices are written correctly).
 
 ## Exam
 0. take some extra ball-point pens with you.
-1. carefully explain how the form should be filled wiht the student's ID and the chosen answers. Make clear that only crosses whould be used to mark the answers and that the writing must be clean.
-2. if the exam contains open questions, ask the student to write their name and ID within the first answer field.
-3. ask the student to separate the exam sheets and return only one solution sheet per exam part (QCM and open questions), which should be piled separately. All other official exam sheets should also be returned (even empty).
-4. make shure the student wrote their name and ID on all returned sheets.
-5. tell the students to keep the exam text, which is unique, therefore they will need it for correction. 
+1. carefully explain how the form should be filled with the student's ID and the chosen answers. Make clear that only crosses whould be used to mark the answers and that the writing must be clean.
+2. if the exam contains open questions, ask the students to write their name and ID within the first answer field.
+3. ask the student to separate the exam sheets and return only one solution sheet per exam part (multiple-choice and open-questions), which should be piled separately. All other official exam sheets shall also be returned (even empty).
+4. make shure the students wrote their name and ID on all returned sheets.
+5. tell the students to keep the exam text. It is unique, therefore they will need it for correction.
 
 ## Scan
-* Count the copies that do not report a student ID (if any) and remove them before scanning.
+* Count the copies that do not have a student ID (if any) and remove them before scanning.
 * **Put all copies in the same orientation**, scan them bottom first.
-* force fromat A4 in the scanner.
+* force fromat A4 in the scanner settings.
 * choose PNG format (no PDF), and set resolution to 300dpi.
 
 ## Correction
-0. correct the open questions first (if any) and give a note by marking one of the cases in the note field (upper right part of the sheet). No mark corresponds to zero (=very bad), the other cases correspond to 1 to 5 (=perfect) from left to right. Do not mark more than one case. The actual points will be determined in the evaluation script later.
+0. correct the open questions first (if any) and give a note by marking **only one** of the cases in the note field (upper right part of the sheet). No mark corresponds to zero (=very bad), the other cases correspond to 1 to 5 (=perfect) from left to right. Do not mark more than one case. The actual points will be determined in the evaluation script later.
 1. scan the solution sheets and put the image files in the `Scan/qcm` and `Scan/string` folders for multiple-choice and open questions respectively.
 3. evaluate the exam by following the example in `exams_correction.R`. The evaluation is interactive and will ask to check in case of ambigiuity.
 4. double check that the pages are all in the same orientation if you get strange error messages.
@@ -72,7 +73,7 @@ This procedure is the result of one semester trial-and-error experience. Whatch 
 	Error in scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
 	line 8 did not have 6 elements
 ```
-this means that the optical reading failed and that line 8 in the Daten.txt file automatically generated has to be corrected manually.
+this means that the optical reading failed and that `line 8` in the Daten.txt file automatically generated has to be corrected manually.
 This file is will be found in the `nops_scan` zip file in the `./Scan/nops` folder generated by the correction process. You should unzip it, correct it and then update the zip file.
 WARNING: **Use a simple text editor to edit the Daten.txt file in order to preserve the leading zeros in the fields.**
 
